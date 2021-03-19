@@ -12,7 +12,6 @@ const port = process.env.PORT || 9000;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-let routes = require("./routes/dataRoutes"); //
 
 
 //Databases Station
