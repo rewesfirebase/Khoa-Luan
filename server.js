@@ -31,7 +31,7 @@ app.route("/").get((req, res) => {
       Path: "/station/list/1 (2, 3,...)",
     },
     "API applications":{
-      Description: "Return recent datas",
+      Description: "Return recent data",
       Path: "/station/1 (2, 3,...)",
     }
   });
