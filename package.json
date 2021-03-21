@@ -4,11 +4,13 @@
   "description": "",
   "main": "server.js",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "fs": "0.0.1-security",
     "mongodb": "^3.6.4",
     "mongoose": "^5.11.19",
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^2.6.1",
+    "socket.io": "^4.0.0"
   },
   "devDependencies": {},
   "scripts": {
