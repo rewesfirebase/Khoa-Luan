@@ -25,10 +25,11 @@ const { MongoClient } = require("mongodb");
 app.route("/").get((req, res) => {
 
   res.status(200).send({
-    listUsersRoute: {
+    
+    Get All Datas": {
       Name: "Get All Datas",
       Description: "Return all users and passwords wifi",
-      Path: "/GetAllStationOne (Two,...)",
+      Path: "/station/list/1 (2, 3,...)",
     },
   });
 });
