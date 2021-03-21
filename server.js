@@ -26,11 +26,14 @@ app.route("/").get((req, res) => {
 
   res.status(200).send({
     
-    Get All Datas": {
-      Name: "Get All Datas",
-      Description: "Return all users and passwords wifi",
+    "Get All Datas": {
+      Description: "Return all data",
       Path: "/station/list/1 (2, 3,...)",
     },
+    "API applications":{
+      Description: "Return recent datas",
+      Path: "/station/1 (2, 3,...)",
+    }
   });
 });
 
