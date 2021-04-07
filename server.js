@@ -7,7 +7,7 @@ var url = require('url');
 const app = express();
 
 //port
-const port = process.env.PORT || 6000;
+const port = process.env.PORT || 1000;
 
 //use bodyParser middleware on express app
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -26,11 +26,11 @@ app.route("/").get((req, res) => {
     
     "Get All Datas": {
       Description: "Return all data",
-      Path: "/station/list/1 (2, 3,...)",
+      Path: "/list",
     },
     "API applications":{
       Description: "Return recent data",
-      Path: "/station/1 (2, 3,...)",
+      Path: "/recent",
     }
   });
 });
