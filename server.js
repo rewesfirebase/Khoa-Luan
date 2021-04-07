@@ -1,34 +1,52 @@
-// server.js
-// where your node app starts
-
-// we've started you off with Express (https://expressjs.com/)
-// but feel free to use whatever libraries or frameworks you'd like through `package.json`.
+//require express and bodyParser
 const express = require("express");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+var url = require('url');
+//create express app
 const app = express();
 
-// our default array of dreams
-const dreams = [
-  "Find and count some sheep",
-  "Climb a really tall mountain",
-  "Wash the dishes"
-];
+//port
+const port = process.env.PORT || 6000;
 
-// make all the files in 'public' available
-// https://expressjs.com/en/starter/static-files.html
-app.use(express.static("public"));
+//use bodyParser middleware on express app
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(cors())
+//MongoDB connected
+const { MongoClient } = require("mongodb");
 
-// https://expressjs.com/en/starter/basic-routing.html
-app.get("/", (request, response) => {
-  response.sendFile(__dirname + "/views/index.html");
+const urlMDB =
+  "mongodb+srv://vutrantienbao290699:vutrantienbao99@project.murnk.mongodb.net/ibm?retryWrites=true&w=majority";
+const client = new MongoClient(urlMDB,{useNewUrlParser: true,
+   useUnifiedTopology: true});
+
+app.route("/").get((req, res) => {
+
+  res.status(200).send("path");
 });
 
-// send the default array of dreams to the webpage
-app.get("/dreams", (request, response) => {
-  // express helps us take JS objects and send them as JSON
-  response.json(dreams);
+app.route("/list").get((req, res) => {
+  client.connect((err, result)=>{
+    collection.find({}).toArray((err, result) => {
+      if (err) { console.log(err) };
+      res.status(200).send(result); 
+    });
+  })
+  client.close();
 });
 
-// listen for requests :)
-const listener = app.listen(process.env.PORT, () => {
-  console.log("Your app is listening on port " + listener.address().port);
+app.route("/recent").get((req, res) => {
+  client.connect((err, result)=>{
+    collection.find({}).sort({ $natural: -1 })
+    .limit(1)
+    .toArray((err, result) => {
+      res.status(200).send(result);
+    });
+  })
+  client.close();
+});
+
+app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}`);
 });
