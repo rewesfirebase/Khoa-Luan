@@ -14,11 +14,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors())
 
-
+const { MongoClient } = require("mongodb");
 //Databases Station
 const url =
   "mongodb+srv://vutrantienbao290699:vutrantienbao99@project.murnk.mongodb.net/test?retryWrites=true&w=majority";
-const { MongoClient } = require("mongodb");
+
 
 
 
@@ -42,7 +42,7 @@ app.route("/station/list/:id").get((req, res) => {
   const client = new MongoClient(url);
   client.connect(function (err) {
     if (err) throw err;
-
+    
     const db = client.db("test");
     const collection = db.collection("Tram_" + req.params.id);
     console.log("Tram_" + req.params.id);
