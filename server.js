@@ -18,10 +18,7 @@ const { MongoClient } = require("mongodb");
 
 const urlMDB =
   "mongodb+srv://vutrantienbao290699:vutrantienbao99@project.murnk.mongodb.net/ibm?retryWrites=true&w=majority";
-const client = new MongoClient(urlMDB,{useNewUrlParser: true,
-   useUnifiedTopology: true});
-const db = client.db("ibm");
-    const collection = db.collection("record")
+
 
 app.route("/").get((req, res) => {
 
@@ -29,9 +26,11 @@ app.route("/").get((req, res) => {
 });
 
 app.route("/list").get((req, res) => {
-  
+  const client = new MongoClient(urlMDB,{useNewUrlParser: true,
+   useUnifiedTopology: true});
   client.connect((err, result)=>{
-    
+    const db = client.db("ibm");
+    const collection = db.collection("record")
     collection.find({}).toArray((err, result) => {
       if (err) { console.log(err) };
       res.status(200).send(result); 
