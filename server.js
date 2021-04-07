@@ -22,7 +22,17 @@ const urlMDB =
 
 app.route("/").get((req, res) => {
 
-  res.status(200).send("path");
+  res.status(200).send({
+    
+    "Get All Datas": {
+      Description: "Return all data",
+      Path: "/station/list/1 (2, 3,...)",
+    },
+    "API applications":{
+      Description: "Return recent data",
+      Path: "/station/1 (2, 3,...)",
+    }
+  });
 });
 
 app.route("/list").get((req, res) => {
