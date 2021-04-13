@@ -62,7 +62,9 @@ app.route("/station/:id").get((req, res) => {
       .limit(1)
       .toArray((err, result) => {
         res.status(200).send(result);
+      console.log(result[0]);
       });
+    
   });
   client.close();
 });
