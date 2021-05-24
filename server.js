@@ -19,6 +19,8 @@ const { MongoClient } = require("mongodb");
 const urlMDB =
   "mongodb+srv://vutrantienbao290699:vutrantienbao99@project.murnk.mongodb.net/ibm?retryWrites=true&w=majority";
 
+const client = new MongoClient(urlMDB,{useNewUrlParser: true,
+   useUnifiedTopology: true});
 
 app.route("/").get((req, res) => {
 
@@ -34,11 +36,10 @@ app.route("/").get((req, res) => {
     }
   });
 });
-
+client.connect((err, result)=>{
 app.route("/list").get((req, res) => {
-  const client = new MongoClient(urlMDB,{useNewUrlParser: true,
-   useUnifiedTopology: true});
-  client.connect((err, result)=>{
+  
+  
     const db = client.db("ibm");
     const collection = db.collection("record")
     collection.find({}).toArray((err, result) => {
@@ -46,13 +47,10 @@ app.route("/list").get((req, res) => {
       res.status(200).send(result); 
     });
   })
-  client.close();
-});
+
 
 app.route("/recent").get((req, res) => {
-  const client = new MongoClient(urlMDB,{useNewUrlParser: true,
-   useUnifiedTopology: true});
-  client.connect((err, result)=>{
+
     const db = client.db("ibm");
     const collection = db.collection("record")
     collection.find({}).sort({ $natural: -1 })
@@ -61,7 +59,6 @@ app.route("/recent").get((req, res) => {
       res.status(200).send(result);
     });
   })
-  client.close();
 });
 
 app.listen(port, () => {
