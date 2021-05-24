@@ -34,7 +34,7 @@ app.route("/").get((req, res) => {
 });
 
 app.route("/station/list/:id").get((req, res) => {
-  const client = new MongoClient(url);
+  const client = new MongoClient(url,{useUnifiedTopology: true});
   client.connect(function(err) {
     if (err) throw err;
 
