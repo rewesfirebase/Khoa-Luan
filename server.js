@@ -32,10 +32,10 @@ app.route("/").get((req, res) => {
     }
   });
 });
-
+const client = new MongoClient(url,{useUnifiedTopology: true});
+client.connect(function(err) {
 app.route("/station/list/:id").get((req, res) => {
-  const client = new MongoClient(url,{useUnifiedTopology: true});
-  client.connect(function(err) {
+  
     if (err) throw err;
 
     const db = client.db("test");
@@ -47,13 +47,10 @@ app.route("/station/list/:id").get((req, res) => {
       }
       res.status(200).send(result);
     });
-  });
-  client.close();
+
 });
 
 app.route("/station/:id").get((req, res) => {
-  const client = new MongoClient(url);
-  client.connect(function(err) {
     if (err) throw err;
     const db = client.db("test");
     const collection = db.collection("Tram_" + req.params.id);
@@ -65,9 +62,7 @@ app.route("/station/:id").get((req, res) => {
         res.status(200).send(result);
       console.log(result[0]);
       });
-    
   });
-  client.close();
 });
 
 app.listen(port, () => {
