@@ -34,11 +34,12 @@ app.route("/").get((req, res) => {
 });
 const client = new MongoClient(url,{useUnifiedTopology: true});
 client.connect(function(err) {
+const db = client.db("ESP");
 app.route("/station/list/:id").get((req, res) => {
   
     if (err) throw err;
 
-    const db = client.db("ESP");
+    
     const collection = db.collection("Tram_" + req.params.id);
     console.log("Tram_" + req.params.id);
     collection.find({}).toArray((err, result) => {
@@ -52,7 +53,7 @@ app.route("/station/list/:id").get((req, res) => {
 
 app.route("/station/:id").get((req, res) => {
     if (err) throw err;
-    const db = client.db("ESP");
+    
     const collection = db.collection("Tram_" + req.params.id);
     collection
       .find({})
