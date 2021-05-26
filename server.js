@@ -37,10 +37,8 @@ app.route("/").get((req, res) => {
   });
 });
 client.connect((err, result)=>{
-app.route("/list").get((req, res) => {
-  
-  
-    const db = client.db("ibm");
+const db = client.db("ibm");
+app.route("/list").get((req, res) => { 
     const collection = db.collection("record")
     collection.find({}).toArray((err, result) => {
       if (err) { console.log(err) };
@@ -50,8 +48,6 @@ app.route("/list").get((req, res) => {
 
 
 app.route("/recent").get((req, res) => {
-
-    const db = client.db("ibm");
     const collection = db.collection("record")
     collection.find({}).sort({ $natural: -1 })
     .limit(1)
