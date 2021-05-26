@@ -18,7 +18,7 @@ app.use(cors());
 const { MongoClient } = require("mongodb");
 //Databases Station
 const url =
-  "mongodb+srv://vutrantienbao290699:vutrantienbao99@project.murnk.mongodb.net/test?retryWrites=true&w=majority";
+  "mongodb+srv://vutrantienbao290699:vutrantienbao99@project.murnk.mongodb.net/ESP?retryWrites=true&w=majority";
 
 app.route("/").get((req, res) => {
   res.status(200).send({
@@ -38,7 +38,7 @@ app.route("/station/list/:id").get((req, res) => {
   
     if (err) throw err;
 
-    const db = client.db("test");
+    const db = client.db("ESP");
     const collection = db.collection("Tram_" + req.params.id);
     console.log("Tram_" + req.params.id);
     collection.find({}).toArray((err, result) => {
@@ -52,7 +52,7 @@ app.route("/station/list/:id").get((req, res) => {
 
 app.route("/station/:id").get((req, res) => {
     if (err) throw err;
-    const db = client.db("test");
+    const db = client.db("ESP");
     const collection = db.collection("Tram_" + req.params.id);
     collection
       .find({})
